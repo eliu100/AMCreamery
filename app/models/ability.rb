@@ -30,6 +30,20 @@ class Ability
       can :update, Employee do |employee|
         employee.current_assignment.store_id == user.current_assignment.store_id
       end
+    elsif user.role? :employee
+      can :index, Assignment
+      can :show, Assignment do |assignment|
+        assignment.employee_id == user.id
+      end
+      can :show, Employee do |employee|
+        employee.id == user.id
+      end
+      can :edit, Employee do |employee|
+        employee.id == user.id
+      end
+      can :update, Employee do |employee|
+        employee.id == user.id
+      end
     else
       can :read, :all
     end
