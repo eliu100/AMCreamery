@@ -1,4 +1,11 @@
-<%= render partial: 'partials/index_structure', locals: {model_name: 'store', 
-                                                         primary: 'active_stores', 
-                                                         secondary: 'inactive_stores',
-                                                         sidebar: nil} %>
+<% if current_user.role? :admin %>
+    <%= render partial: 'partials/index_structure', locals: {model_name: 'store', 
+                                                            primary: 'active_stores', 
+                                                            secondary: 'inactive_stores',
+                                                            sidebar: nil} %>
+<% elsif current_user.role? :manager %>
+    <%= render partial: 'partials/index_structure', locals: {model_name: 'store', 
+                                                                primary: 'active_stores', 
+                                                                secondary: nil,
+                                                                sidebar: nil} %>
+<% end %>

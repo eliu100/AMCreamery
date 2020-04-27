@@ -6,8 +6,17 @@ class StoresController < ApplicationController
 
   def index
     # get data on all stores and paginate the output to 10 per page
-    @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
-    @inactive_stores = Store.inactive.alphabetical.paginate(page: params[:ipage]).per_page(10)
+    if current_user.role? :admin
+      @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
+      @inactive_stores = Store.inactive.alphabetical.paginate(page: params[:ipage]).per_page(10)
+    elsif current_user.role? :manager
+      @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
+      @active_stores = @active_stores.where(id: current_user.current_assignment.store_id)
+      @inactive_stores = Array.new
+    else
+      @active_stores = Array.new
+      @inactive_stores = Array.new
+    end
   end
 
   def show
