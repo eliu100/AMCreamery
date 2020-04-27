@@ -7,7 +7,12 @@
       <% if @employee.current_assignment.nil? %>
         n/a<br /><br />
       <% else %>
-        <%= link_to @employee.current_assignment.store.name, store_path(@employee.current_assignment.store) %><br />
+        <% if can? :show, @employee.current_assignment.store %>
+          <%= link_to @employee.current_assignment.store.name, store_path(@employee.current_assignment.store) %>
+        <% else %>
+          <%= @employee.current_assignment.store.name %>
+        <% end %>
+        <br />
         since <%= @employee.current_assignment.start_date.strftime("%b %-d, %Y") %><br /><br />
 
       <% end %>

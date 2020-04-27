@@ -11,16 +11,22 @@
           <th>Employee Name</th>
           <th>Store Name</th>
           <th>Dates</th>
-          <% if (can? :edit, assignments) || (can? :destroy, assignments) %>
+          <% if (can? :edit, Assignment) || (can? :destroy, Assignment) %>
             <th>Options</th>
           <% end %>
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
             <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
-            <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
+            <td>
+              <% if can? :show, assignment.store %>
+                <%= link_to assignment.store.name, store_path(assignment.store) %>
+              <% else %>
+                <%= assignment.store.name %>
+              <% end %>
+            </td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
-            <% if (can? :edit, assignments) || (can? :destroy, assignments) %>
+            <% if (can? :edit, Assignment) || (can? :destroy, Assignment) %>
               <td>
                 <% if state.downcase == 'current' %>
                   <% if can? :edit, assignment %>

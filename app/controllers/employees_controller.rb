@@ -8,7 +8,12 @@ class EmployeesController < ApplicationController
     @active_managers = Employee.managers.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @active_employees = Employee.regulars.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @inactive_employees = Employee.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
-
+    if current_user.role? :manager
+      @active_managers = @active_managers.where(id: current_user.id)
+      current_store = current_user.current_assignment.store
+      active_arr = current_store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}
+      @active_employees = @active_employees.where(id: active_arr.map(&:id))
+    end
   end
 
   def show

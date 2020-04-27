@@ -12,7 +12,13 @@
         </thead>
         <% @previous_assignments.each do |assignment| %>
           <tr %>
-            <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
+            <td>
+              <% if can? :show, assignment.store %>
+                <%= link_to assignment.store.name, store_path(assignment.store) %>
+              <% else %>
+                <%= assignment.store.name %>
+              <% end %>
+            </td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.strftime("%-m/%-d/%y") %></td>
           </tr>
         <% end %>
@@ -20,14 +26,18 @@
       <p class="supertiny"></p>
       <br />
     </div>
-    <div class="card-action">
-      <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
-    </div>
+    <% if can? :create, Assignment %>
+      <div class="card-action">
+        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+      </div>
+    <% end %>
   </div>
 <% else %>
-  <div class="card grey lighten-3">
-    <div class="card-action">
-      <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+  <% if can? :create, Assignment %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
