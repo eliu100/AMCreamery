@@ -11,9 +11,12 @@ Rails.application.routes.draw do
   resources :employees
   resources :stores
   resources :assignments
+  resources :sessions
 
   # Custom routes
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment
+  get 'login' => 'sessions#new', :as => :login
+  get 'logout' => 'sessions#destroy', :as => :logout
 
   # You can have the root of your site routed with 'root'
   root 'home#index'
