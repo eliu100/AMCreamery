@@ -7,6 +7,13 @@ class AssignmentsController < ApplicationController
     # for phase 3 only
       @current_assignments = Assignment.current.chronological.paginate(page: params[:page]).per_page(10)
       @past_assignments = Assignment.past.chronological.paginate(page: params[:page]).per_page(10)
+      if current_user.role? :manager
+        @current_assignments = @current_assignments.where(store_id: current_user.current_assignment.store_id)
+        @past_assignments = @past_assignments.where(store_id: current_user.current_assignment.store_id)
+      elsif current_user.role? :employee
+        @current_assignments = @current_assignments.where(employee_id: current_user.id)
+        @past_assignments = @past_assignments.where(employee_id: current_user.id)
+      end
   end
 
   def new

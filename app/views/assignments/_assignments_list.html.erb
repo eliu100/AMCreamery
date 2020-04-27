@@ -11,24 +11,32 @@
           <th>Employee Name</th>
           <th>Store Name</th>
           <th>Dates</th>
-          <th>Options</th>
+          <% if (can? :edit, assignments) || (can? :destroy, assignments) %>
+            <th>Options</th>
+          <% end %>
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
             <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
             <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
-            <td>
-              <% if state.downcase == 'current' %>
-                <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
-                  <i class="material-icons">stop</i>
+            <% if (can? :edit, assignments) || (can? :destroy, assignments) %>
+              <td>
+                <% if state.downcase == 'current' %>
+                  <% if can? :edit, assignment %>
+                    <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
+                      <i class="material-icons">stop</i>
+                    <% end %>
+                  <% end %>
                 <% end %>
-              <% end %>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
-                  <i class="material-icons">delete</i>
-              <% end %>
-            </td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <% if can? :destroy, assignment %>
+                  <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
+                      <i class="material-icons">delete</i>
+                  <% end %>
+                <% end %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </table>

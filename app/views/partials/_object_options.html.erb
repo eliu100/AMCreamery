@@ -7,15 +7,19 @@
     &nbsp;&nbsp;
   
   <% if controller.respond_to?(:update) %>
-    <%= link_to(eval("edit_#{model_name}_path(object)"), class: 'waves-effect waves-light btn') do %>
-        &nbsp;<%= "Edit #{opt}" %>
+    <% if can? :update, object %>
+      <%= link_to(eval("edit_#{model_name}_path(object)"), class: 'waves-effect waves-light btn') do %>
+          &nbsp;<%= "Edit #{opt}" %>
+      <% end %>
+      &nbsp;&nbsp;
     <% end %>
-    &nbsp;&nbsp;
   <% end %>
   
   <% if controller.respond_to?(:destroy) %>
-    <%= link_to(eval("#{model_name}_path(object)"), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{opt}"}, class: 'waves-effect waves-light btn btn-alert') do %>
-        &nbsp;<%= "Delete #{opt}" %>
+    <% if can? :destroy, object %>
+      <%= link_to(eval("#{model_name}_path(object)"), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{opt}"}, class: 'waves-effect waves-light btn btn-alert') do %>
+          &nbsp;<%= "Delete #{opt}" %>
+      <% end %>
     <% end %>
   <% end %>
 
