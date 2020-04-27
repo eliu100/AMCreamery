@@ -2,7 +2,7 @@ class StoresController < ApplicationController
 
   before_action :set_store, only: [:show, :edit, :update, :destroy]
   before_action :check_login
-
+  authorize_resource
 
   def index
     # get data on all stores and paginate the output to 10 per page

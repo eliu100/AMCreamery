@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :terminate, :destroy]
   before_action :check_login
+  authorize_resource
 
   def index
     # for phase 3 only

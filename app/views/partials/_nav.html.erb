@@ -6,7 +6,12 @@
       <li><%= link_to 'Assignments', assignments_path %></li>
     </ul>
     <ul class="right">
-      <li></li>
+      <% if logged_in? %>
+        <li><%= link_to 'Logout', logout_path %></li>
+        <li>[<%= current_user.proper_name %> : <%= current_user.role %>]</li>
+      <% else %>
+        <li><%= link_to 'Login', login_path %></li>
+      <% end %>
     </ul>
   </div>
 </nav>
