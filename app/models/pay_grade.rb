@@ -15,10 +15,6 @@ class PayGrade < ApplicationRecord
   validates_presence_of :level
   validates_uniqueness_of :level, case_sensitive: false
 
-  def name
-    level
-  end
-
   # Callbacks
   before_destroy -> { cannot_destroy_object() }
   

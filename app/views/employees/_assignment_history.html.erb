@@ -28,7 +28,7 @@
     </div>
     <% if can? :create, Assignment %>
       <div class="card-action">
-        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id, start_date: Date.today) %>
       </div>
     <% end %>
   </div>
@@ -36,7 +36,7 @@
   <% if can? :create, Assignment %>
     <div class="card grey lighten-3">
       <div class="card-action">
-        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+        <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id, start_date: Date.today) %>
       </div>
     </div>
   <% end %>

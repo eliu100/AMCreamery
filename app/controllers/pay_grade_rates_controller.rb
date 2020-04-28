@@ -4,6 +4,8 @@ class PayGradeRatesController < ApplicationController
 
     def new
         @paygraderate = PayGradeRate.new
+        @paygraderate.pay_grade_id = params[:pay_grade_id] unless params[:pay_grade_id].nil?
+        @paygraderate.start_date = params[:start_date] unless params[:start_date].nil?
     end
     
     def create
