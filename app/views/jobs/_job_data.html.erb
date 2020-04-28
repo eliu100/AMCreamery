@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= @job.name.titleize %></h4>
+
+    <b>Description&nbsp;&nbsp;</b>
+
+    <%= @job.description%> <br /><br />
+
+    <b>Active with AMC?&nbsp;&nbsp;</b>
+      <%= @job.active ? "Yes" : "No" %>
+      <br>
+  </div>
+</div>

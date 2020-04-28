@@ -7,6 +7,9 @@
       <% if can? :index, Employee %>
         <li><%= link_to 'Employees', employees_path %></li>
       <% end %>
+      <% if can? :index, Job %>
+        <li><%= link_to 'Jobs', jobs_path %></li>
+      <% end %>
       <% if can? :index, PayGrade %>
         <li><%= link_to 'Paygrades', pay_grades_path %></li>
       <% end %>
