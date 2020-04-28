@@ -1,4 +1,11 @@
-<%= render partial: 'partials/index_structure', locals: {model_name: 'assignment', 
-                                                         primary: 'current_assignments', 
-                                                         secondary: 'past_assignments',
-                                                         sidebar: nil} %>
+<% if current_user.role? :manager %>
+    <%= render partial: 'partials/index_structure', locals: {model_name: 'assignment', 
+                                                            primary: 'current_assignments', 
+                                                            secondary: nil,
+                                                            sidebar: nil} %>
+<% else %>
+    <%= render partial: 'partials/index_structure', locals: {model_name: 'assignment', 
+                                                            primary: 'current_assignments', 
+                                                            secondary: 'past_assignments',
+                                                            sidebar: nil} %>
+<% end %>
