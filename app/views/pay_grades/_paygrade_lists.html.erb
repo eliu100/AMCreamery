@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-content">
+    <h4>Paygrades at AMC</h4>
+
+    <% if @paygrades.empty? %>
+      <p>There are no active paygrades at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Level</th>
+          <th>Current Rate</th>
+          <th class="align_center">Options</th>
+        </thead>
+        <% for paygrade in @paygrades %>
+          <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+            <td> <%= paygrade.level %> </td>
+            <td> <%= number_to_currency(paygrade.pay_grade_rates.current.first.rate) %>
+
+          <td class="align_center">
+            <%= link_to edit_pay_grade_path(paygrade) do %>
+              <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate @paygrades, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
+  </div>
+</div>

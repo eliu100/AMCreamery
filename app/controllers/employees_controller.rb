@@ -44,6 +44,11 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def destroy
+    @employee.destroy
+    redirect_to employees_path, notice: "Removed employee from the system."
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -53,7 +58,7 @@ class EmployeesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :ssn, :phone, :date_of_birth, :role, :active)
+    params.require(:employee).permit(:first_name, :last_name, :ssn, :phone, :date_of_birth, :role, :active, :username, :password, :password_confirmation)
   end
 
   def retrieve_employee_assignments

@@ -17,7 +17,13 @@
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
-            <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
+            <td>
+              <% if can? :show, assignment.employee %>
+                <%= link_to assignment.employee.name, employee_path(assignment.employee) %>
+              <% else %>
+                <%= assignment.employee.name %>
+              <% end %>
+            </td>
             <td>
               <% if can? :show, assignment.store %>
                 <%= link_to assignment.store.name, store_path(assignment.store) %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :stores
   resources :assignments
   resources :sessions
+  resources :pay_grades
 
   # Custom routes
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment

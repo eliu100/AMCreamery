@@ -1,14 +1,23 @@
 <nav id="nav">
   <div class="container">
     <ul class="left hide-on-med-and-down">
-      <li><%= link_to 'Stores', stores_path %></li>
-      <li><%= link_to 'Employees', employees_path %></li>
-      <li><%= link_to 'Assignments', assignments_path %></li>
+      <% if can? :index, Assignment %>
+        <li><%= link_to 'Assignments', assignments_path %></li>
+      <% end %>
+      <% if can? :index, Employee %>
+        <li><%= link_to 'Employees', employees_path %></li>
+      <% end %>
+      <% if can? :index, PayGrade %>
+        <li><%= link_to 'Paygrades', pay_grades_path %></li>
+      <% end %>
+      <% if can? :index, Store %>
+        <li><%= link_to 'Stores', stores_path %></li>
+      <% end %>
     </ul>
     <ul class="right">
       <% if logged_in? %>
         <li><%= link_to 'Logout', logout_path %></li>
-        <li>[<%= current_user.proper_name %> : <%= current_user.role %>]</li>
+        <li><%= link_to current_user.proper_name, employee_path(current_user) %></li>
       <% else %>
         <li><%= link_to 'Login', login_path %></li>
       <% end %>

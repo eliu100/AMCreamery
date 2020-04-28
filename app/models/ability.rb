@@ -45,7 +45,6 @@ class Ability
         employee.id == user.id
       end
     else
-      can :read, :all
     end
 
   end
