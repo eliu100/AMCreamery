@@ -1,0 +1,39 @@
+
+
+<% unless @previous_rates.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <h5>Previous Payrates</h5>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Payrate</th>
+          <th>Dates</th>
+        </thead>
+        <% @previous_rates.each do |pgr| %>
+          <tr %>
+            <td><%= number_to_currency pgr.rate %></td>
+            <td><%= pgr.start_date.strftime("%-m/%-d/%y") %> - 
+              <% if pgr.end_date.nil? %>
+                current
+              <% else %>
+                <%= pgr.end_date.strftime("%-m/%-d/%y") %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+    </div>
+    <div class="card-action">
+        <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id) %>
+    </div>
+  </div>
+<% else %>
+    <div class="card grey lighten-3">
+        <div class="card-action">
+            <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id) %>
+        </div>
+    </div>
+<% end %>

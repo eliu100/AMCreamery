@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= @paygrade.level %></h4>
+
+    <b>Current Payrate&nbsp;&nbsp;</b>
+
+    <% if @current_rate.nil? %>
+      n/a<br /><br />
+    <% else %>
+      <%= number_to_currency @current_rate.rate %>
+      <br />
+      since <%= @current_rate.start_date.strftime("%b %-d, %Y") %><br /><br />
+    <% end %>
+
+    <b>Active with AMC?&nbsp;&nbsp;</b>
+      <%= @paygrade.active ? "Yes" : "No" %>
+      <br>
+  </div>
+</div>

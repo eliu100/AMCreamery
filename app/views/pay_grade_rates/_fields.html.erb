@@ -1,0 +1,4 @@
+<%= f.input :pay_grade_id, collection: PayGrade.active.alphabetical, include_blank: true, required: true %>
+<%= f.input :rate, label_html: { class: 'active' }, required: true %>
+<%= f.input :start_date, label_html: { class: 'active' }, required: true %>
+<%= f.input :end_date, label_html: { class: 'active' } %>

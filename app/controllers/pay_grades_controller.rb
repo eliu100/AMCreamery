@@ -1,11 +1,16 @@
 class PayGradesController < ApplicationController
-    before_action :set_paygrade, only: [:edit, :update]
+    before_action :set_paygrade, only: [:show, :edit, :update]
     before_action :check_login
     authorize_resource
 
     def index
         # get data on all stores and paginate the output to 10 per page
-        @paygrades = PayGrade.alphabetical.paginate(page: params[:page]).per_page(10)
+        @paygrades = PayGrade.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    end
+
+    def show
+        @current_rate = @paygrade.pay_grade_rates.current.first
+        @previous_rates = @paygrade.pay_grade_rates.chronological.to_a - [@current_rate]
     end
 
     def new
@@ -18,7 +23,7 @@ class PayGradesController < ApplicationController
     def create
         @paygrade = PayGrade.new(paygrade_params)
         if @paygrade.save
-            redirect_to pay_grades_path, notice: "Successfully added #{@paygrade.level} as an employee."
+            redirect_to @paygrade, notice: "Successfully added #{@paygrade.level} as a paygrade."
         else
             render action: 'new'
         end
@@ -26,7 +31,7 @@ class PayGradesController < ApplicationController
     
     def update
         if @paygrade.update_attributes(paygrade_params)
-          redirect_to pay_grades_path, notice: "Updated #{@paygrade.level}'s information."
+          redirect_to @paygrade, notice: "Updated #{@paygrade.level}'s information."
         else
           render action: 'edit'
         end

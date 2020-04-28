@@ -9,13 +9,19 @@
       <table class="striped highlight">
         <thead>
           <th>Level</th>
-          <th>Current Rate</th>
+          <th>Current Payrate</th>
           <th class="align_center">Options</th>
         </thead>
         <% for paygrade in @paygrades %>
           <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
-            <td> <%= paygrade.level %> </td>
-            <td> <%= number_to_currency(paygrade.pay_grade_rates.current.first.rate) %>
+            <td> <%= link_to paygrade.level, pay_grade_path(paygrade) %> </td>
+            <td> 
+              <% if paygrade.pay_grade_rates.current.empty? %>
+                n/a
+              <% else %>
+                <%= number_to_currency(paygrade.pay_grade_rates.current.first.rate) %>
+              <% end %>
+            </td>
 
           <td class="align_center">
             <%= link_to edit_pay_grade_path(paygrade) do %>
