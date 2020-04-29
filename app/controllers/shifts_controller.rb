@@ -27,7 +27,9 @@ class ShiftsController < ApplicationController
     end
     
     def create
-        @shift = Shift.new(shift_params)
+        sp = shift_params
+        sp[:assignment_id] = Employee.find(sp[:assignment_id]).current_assignment.id
+        @shift = Shift.new(sp)
         if @shift.save
             redirect_to @shift, notice: "Successfully added shift."
         else
