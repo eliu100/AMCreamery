@@ -7,8 +7,12 @@ class ShiftsController < ApplicationController
         @upcoming_shifts = Shift.upcoming.chronological.paginate(page: params[:page]).per_page(10)
         @past_shifts = Shift.past.chronological.paginate(page: params[:page]).per_page(10)
         if current_user.role? :manager
-            @upcoming_shifts = @upcoming_shifts.for_store(current_user.current_assignment.store)
-            @past_shifts = @past_shifts.for_store(current_user.current_assignment.store)
+            curr_store = current_user.current_assignment.store
+            @upcoming_shifts = @upcoming_shifts.for_store(curr_store)
+            @past_shifts = @past_shifts.for_store(curr_store)
+        elsif current_user.role? :employee
+            @upcoming_shifts = @upcoming_shifts.for_employee(current_user)
+            @past_shifts = @past_shifts.for_employee(current_user)
         end
     end
 
@@ -52,7 +56,7 @@ class ShiftsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_params
-        params.require(:shift).permit(:assignment_id, :date, :start_time, :end_time, :notes)
+        params.require(:shift).permit(:assignment_id, :date, :status, :start_time, :end_time, :notes)
     end
 
 end

@@ -9,8 +9,10 @@
         <thead>
           <th>Employee</th>
           <th>Store</th>
+          <th>Status</th>
           <th>Date</th>
-          <th>Starting</th>
+          <th>Times</th>
+          <th class="align_center">Options</th>
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
@@ -22,8 +24,19 @@
                     <%= shift.store.name %>
                 <% end %>
             </td>
+            <td><%= shift.status.capitalize %></td>
             <td><%= shift.date.strftime("%-m/%-d") %></td>
-            <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+            <td><%= shift.start_time.strftime("%l:%M %P") %>- <%= shift.end_time.nil? ? 'Now' : shift.end_time.strftime("%l:%M %P") %></td>
+            <td class="align_center">
+                <%= link_to shift_path(shift) do %>
+                    <i class="material-icons">pageview</i>
+                <% end %>
+                <% if can? :edit, shift %>
+                  <%= link_to edit_shift_path(shift) do %>
+                      <i class="material-icons">edit</i>
+                  <% end %>
+                <% end %>
+            </td>
           </tr>
         <% end %>
       </table>

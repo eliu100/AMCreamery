@@ -5,18 +5,24 @@
     <% if shifts.empty? %>
       <p>There are no <%= state.downcase %> shifts at this time.</p>
     <% else %>
-
+      
       <table class="striped highlight">
         <thead>
           <th>Employee</th>
           <th>Date</th>
           <th>Starting</th>
+          <th>View</th>
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
             <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
             <td><%= shift.date.strftime("%-m/%-d") %></td>
             <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+            <td>
+              <%= link_to shift_path(shift) do %>
+                <i class="material-icons">pageview</i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>

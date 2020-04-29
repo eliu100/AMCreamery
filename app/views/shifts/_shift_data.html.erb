@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-content">
+      <h5><b>Employee&nbsp;&nbsp;</b>
+      <%= link_to @shift.assignment.employee.name, employee_path(@shift.assignment.employee) %><br /><br />
+
+      <b>Store&nbsp;&nbsp;</b>
+      <% if can? :show, @shift.assignment.store %>
+          <%= link_to @shift.assignment.store.name, store_path(@shift.assignment.store) %>
+      <% else %>
+          <%= @shift.assignment.store.name %>
+      <% end %></h5><br /><br />
+
+      <b>Status&nbsp;&nbsp;</b>
+      <%= @shift.status.capitalize %><br /><br />
+
+      <b>Date&nbsp;&nbsp;</b>
+      <%= @shift.date.strftime("%b %-d, %Y") %><br /><br />
+
+      <% if @shift.status == 'finished' %>
+        <b>Duration&nbsp;&nbsp;</b>
+        <%= @shift.duration %> hours<br /><br />
+      <% end %>
+
+      <b>Times&nbsp;&nbsp;</b>
+      <%= @shift.start_time.strftime("%l:%M %P") %>- <%= @shift.end_time.nil? ? 'Now' : @shift.end_time.strftime("%l:%M %P") %> 
+  
+    </div>
+  </div>
+  

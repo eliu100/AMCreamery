@@ -31,6 +31,10 @@ class Ability
         employee.current_assignment.store_id == user.current_assignment.store_id
       end
     elsif user.role? :employee
+      can :index, Shift
+      can :show, Shift do |shift|
+        shift.assignment.employee_id == user.id
+      end
       can :index, Assignment
       can :show, Assignment do |assignment|
         assignment.employee_id == user.id
