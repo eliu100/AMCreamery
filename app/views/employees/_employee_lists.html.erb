@@ -1,5 +1,4 @@
-<div class="card">
-  <div class="card-content">
+
     <h4><%= state.capitalize %> <%= role.capitalize %> at AMC</h4>
 
     <% if employees.empty? %>
@@ -31,5 +30,3 @@
       <br />
       <%= will_paginate employees, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
     <% end %>
-  </div>
-</div>

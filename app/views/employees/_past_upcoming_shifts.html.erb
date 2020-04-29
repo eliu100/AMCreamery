@@ -1,0 +1,29 @@
+<% if @past_shifts.empty? && @upcoming_shifts.empty? %>
+    <% if can? :create, Shift %>
+        <div class="card grey lighten-3">
+            <div class="card-action">
+                <%= link_to "New Shift", new_shift_path %>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+    <div class="card">
+        <div class="card-content">
+            <ul class="tabs">
+            <li class="tab"><a href="#upcoming">Upcoming</a></li>
+            <li class="tab"><a href="#past">Past</a></li>
+            </ul>
+
+            <div id="upcoming">
+                <%= render partial: 'shifts_list', locals: { state: 'Upcoming', 
+                                                shifts: @upcoming_shifts } %>
+            </div>
+            <div id="past">
+                <%= render partial: 'shifts_list', locals: { state: 'Past', 
+                                                shifts: @past_shifts } %>
+            </div>
+        </div>
+    </div>
+
+        
+<% end %>

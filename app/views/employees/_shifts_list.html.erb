@@ -1,0 +1,32 @@
+<% if shifts.empty? %>
+    <% if can? :create, Shift %>
+        <div class="card-action">
+            <%= link_to "New Shift", new_shift_path %>
+        </div>
+    <% end %>
+<% else %>
+
+    <h5><%= state %> Shifts</h5>
+
+    <table class="striped highlight">
+        <thead>
+            <th>Date</th>
+            <th>Starting</th>
+        </thead>
+        <% shifts.each do |shift| %>
+            <tr %>
+                <td><%= shift.date.strftime("%-m/%-d") %></td>
+                <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+            </tr>
+        <% end %>
+    </table>
+    <p class="supertiny"></p>
+    <br />
+    <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+
+    <% if can? :create, Shift %>
+        <div class="card-action">
+            <%= link_to "New Shift", new_shift_path %>
+        </div>
+    <% end %>
+<% end %>

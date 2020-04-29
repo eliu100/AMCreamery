@@ -1,12 +1,29 @@
 <div class="row">
   <div class="small-8 columns">
-    <!-- primary partial gets displayed here in main div -->
-    <%= render partial: "#{primary}" %>
-    <!-- sometimes we want another partial below -->
-    <% unless secondary.nil? %>
-      <p>&nbsp;</p>
-      <%= render partial: "#{secondary}" %>
-    <% end %>
+    <div class="card">
+      <div class="card-content">
+        <% unless secondary.nil? %>
+          
+          <ul class="tabs">
+            <li class="tab"><a href="#primary"><%= primary_tab %></a></li>
+            <li class="tab"><a href="#secondary"><%= secondary_tab %></a></li>
+          </ul>
+
+          <div id="primary">
+            <%= render partial: "#{primary}" %>
+          </div>
+          <div id="secondary">
+            <%= render partial: "#{secondary}" %>
+          </div>
+
+          <!-- <%= render partial: "#{primary}" %>
+          <p>&nbsp;</p>
+          <%= render partial: "#{secondary}" %> -->
+        <% else %>
+          <%= render partial: "#{primary}" %>
+        <% end %>
+      </div>
+    </div>
     
   </div>
   <div class="small-4 columns">

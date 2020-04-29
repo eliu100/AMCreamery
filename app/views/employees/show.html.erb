@@ -1,5 +1,13 @@
-<%= render partial: 'partials/show_structure', locals: {model_name: 'employee', 
-                                                         object: @employee,
-                                                         primary: 'employee_data', 
-                                                         secondary: 'secondary_information',
-                                                         sidebar: 'assignment_history'} %>
+<% if current_user.role? :employee %>
+    <%= render partial: 'partials/show_structure', locals: {model_name: 'employee', 
+                                                            object: @employee,
+                                                            primary: 'employee_data', 
+                                                            secondary: nil,
+                                                            sidebar: 'past_upcoming_shifts'} %>
+<% else %>
+    <%= render partial: 'partials/show_structure', locals: {model_name: 'employee', 
+                                                            object: @employee,
+                                                            primary: 'employee_data', 
+                                                            secondary: 'assignment_history',
+                                                            sidebar: 'past_upcoming_shifts'} %>
+<% end %>

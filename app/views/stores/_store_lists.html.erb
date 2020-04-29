@@ -1,5 +1,4 @@
-<div class="card">
-  <div class="card-content">
+
     <h4><%= state.capitalize %> Stores owned by AMC</h4>
 
     <% if stores.empty? %>
@@ -41,5 +40,4 @@
       <br />
       <%= will_paginate stores, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
     <% end %>
-  </div>
-</div>
+  

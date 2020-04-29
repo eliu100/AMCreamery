@@ -1,5 +1,4 @@
-<div class="card">
-  <div class="card-content">
+
     <h4>Paygrades at AMC</h4>
 
     <% if @paygrades.empty? %>
@@ -35,5 +34,3 @@
       <br />
       <%= will_paginate @paygrades, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
     <% end %>
-  </div>
-</div>

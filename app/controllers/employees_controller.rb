@@ -18,6 +18,8 @@ class EmployeesController < ApplicationController
 
   def show
     retrieve_employee_assignments
+    @upcoming_shifts = @employee.shifts.for_next_days(7).chronological.paginate(page: params[:page]).per_page(10)
+    @past_shifts = @employee.shifts.for_past_days(7).chronological.paginate(page: params[:page]).per_page(10)
   end
 
   def new

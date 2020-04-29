@@ -5,7 +5,9 @@
                                                             sidebar: nil} %>
 <% else %>
     <%= render partial: 'partials/index_structure', locals: {model_name: 'assignment', 
-                                                            primary: 'current_assignments', 
+                                                            primary: 'current_assignments',
+                                                            primary_tab: 'Current', 
                                                             secondary: 'past_assignments',
+                                                            secondary_tab: 'Past',
                                                             sidebar: nil} %>
 <% end %>
