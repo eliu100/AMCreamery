@@ -13,6 +13,9 @@
       <% if can? :index, PayGrade %>
         <li><%= link_to 'Paygrades', pay_grades_path %></li>
       <% end %>
+      <% if can? :index, Shift %>
+        <li><%= link_to 'Shifts', shifts_path %></li>
+      <% end %>
       <% if can? :index, Store %>
         <li><%= link_to 'Stores', stores_path %></li>
       <% end %>

@@ -1,0 +1,33 @@
+
+    <h5><%= state.capitalize %> Shifts</h5>
+
+    <% if shifts.empty? %>
+      <p>There are no <%= state.downcase %> shifts at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Employee</th>
+          <th>Store</th>
+          <th>Date</th>
+          <th>Starting</th>
+        </thead>
+        <% shifts.each do |shift| %>
+          <tr %>
+            <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+            <td>
+                <% if can? :show, shift.store %>
+                    <%= link_to shift.store.name, store_path(shift.store) %>
+                <% else %>
+                    <%= shift.store.name %>
+                <% end %>
+            </td>
+            <td><%= shift.date.strftime("%-m/%-d") %></td>
+            <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
