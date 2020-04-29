@@ -38,7 +38,9 @@ class ShiftsController < ApplicationController
     end
     
     def update
-        if @shift.update_attributes(shift_params)
+        sp = shift_params
+        sp[:assignment_id] = Employee.find(sp[:assignment_id]).current_assignment.id
+        if @shift.update_attributes(sp)
           redirect_to @shift, notice: "Updated shift's information."
         else
           render action: 'edit'

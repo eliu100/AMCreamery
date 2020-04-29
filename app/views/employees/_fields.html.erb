@@ -1,6 +1,10 @@
 <%= f.input :first_name, label_html: { class: 'active' } %>
 <%= f.input :last_name, label_html: { class: 'active' } %>
-<%= f.input :date_of_birth, label_html: { class: 'active' } %>
+<% if f.object.date_of_birth.nil? %>
+    <%= f.input :date_of_birth, label_html: { class: 'active' } %>
+<% else %>
+    <%= f.input :date_of_birth, label_html: { class: 'active' }, input_html: { :value => localize(f.object.date_of_birth, :format => "%b %-d, %Y")} %>
+<% end %>
 <%= f.input :ssn, label: 'Social Security Number', label_html: { class: 'active' } %>
 <%= f.input :phone, label_html: { class: 'active' } %>
 <%= f.input :role, collection: Employee::ROLES_LIST, include_blank: true %>
