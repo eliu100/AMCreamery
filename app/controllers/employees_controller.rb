@@ -30,7 +30,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    @employee = Employee.new(employee_params)
+    @employee = Employee.new(employee_params_admin)
     if @employee.save
       redirect_to @employee, notice: "Successfully added #{@employee.proper_name} as an employee."
     else
@@ -39,10 +39,18 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if @employee.update_attributes(employee_params)
-      redirect_to @employee, notice: "Updated #{@employee.proper_name}'s information."
+    if current_user.role? :admin
+      if @employee.update_attributes(employee_params_admin)
+        redirect_to @employee, notice: "Updated #{@employee.proper_name}'s information."
+      else
+        render action: 'edit'
+      end
     else
-      render action: 'edit'
+      if @employee.update_attributes(employee_params)
+        redirect_to @employee, notice: "Updated #{@employee.proper_name}'s information."
+      else
+        render action: 'edit'
+      end
     end
   end
 
@@ -59,8 +67,12 @@ class EmployeesController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def employee_params
+  def employee_params_admin
     params.require(:employee).permit(:first_name, :last_name, :ssn, :phone, :date_of_birth, :role, :active, :username, :password, :password_confirmation)
+  end
+
+  def employee_params
+    params.require(:employee).permit(:first_name, :last_name, :ssn, :phone, :date_of_birth, :active, :username, :password, :password_confirmation)
   end
 
   def retrieve_employee_assignments

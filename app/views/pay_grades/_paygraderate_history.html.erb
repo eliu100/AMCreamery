@@ -27,13 +27,13 @@
       <br />
     </div>
     <div class="card-action">
-        <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id, start_date: Date.today) %>
+        <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id) %>
     </div>
   </div>
 <% else %>
     <div class="card grey lighten-3">
         <div class="card-action">
-            <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id, start_date: Date.today) %>
+            <%= link_to "New Payrate", new_pay_grade_rate_path(pay_grade_id: @paygrade.id) %>
         </div>
     </div>
 <% end %>
