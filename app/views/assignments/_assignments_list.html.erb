@@ -34,17 +34,17 @@
                 <i class="material-icons">pageview</i>
               <% end %>
               &nbsp;&nbsp;&nbsp;&nbsp;
+              <% if can? :edit, assignment %>
+                  <%= link_to edit_assignment_path(assignment) do %>
+                    <i class="material-icons">edit</i>
+                  <% end %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+              <% end %>
               <% if state.downcase == 'current' %>
                 <% if can? :edit, assignment %>
                   <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
                     <i class="material-icons">stop</i>
                   <% end %>
-                <% end %>
-              <% end %>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <% if can? :destroy, assignment %>
-                <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
-                    <i class="material-icons">delete</i>
                 <% end %>
               <% end %>
             </td>

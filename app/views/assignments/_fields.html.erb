@@ -1,4 +1,11 @@
 <%= f.input :employee_id, collection: Employee.alphabetical.active.to_a, include_blank: true %>
 <%= f.input :store_id, collection: Store.alphabetical.active.to_a, include_blank: true %>
 <%= f.input :pay_grade_id, label_method: :level, collection: PayGrade.active.alphabetical, include_blank: true %>
-<%= f.input :start_date, label_html: { class: 'active' } %>
+<% if f.object.start_date.nil? %>
+    <%= f.input :start_date, label_html: { class: 'active' } %>
+<% else %>
+    <%= f.input :start_date, label_html: { class: 'active' }, input_html: { :value => localize(f.object.start_date, :format => "%b %-d, %Y")} %>
+<% end %>
+<% unless f.object.end_date.nil? %>
+    <%= f.input :end_date, label_html: { class: 'active' }, input_html: { :value => localize(f.object.end_date, :format => "%b %-d, %Y")} %>
+<% end %>

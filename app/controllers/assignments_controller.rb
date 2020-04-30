@@ -21,6 +21,17 @@ class AssignmentsController < ApplicationController
     @past_shifts = @assignment.shifts.past.chronological.paginate(page: params[:page]).per_page(10)
   end
 
+  def edit
+  end
+
+  def update
+    if @assignment.update_attributes(assignment_params)
+      redirect_to @assignment, notice: "Updated assignment's information."
+    else
+      render action: 'edit'
+    end
+  end
+
   def new
     @assignment = Assignment.new
     @assignment.employee_id = params[:employee_id] unless params[:employee_id].nil?
