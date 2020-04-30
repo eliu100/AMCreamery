@@ -1,4 +1,4 @@
-<% opt = "#{object.respond_to?(:name) ? object.name : model_name.capitalize }" %>
+<% opt = "#{object.respond_to?(:name) ? object.name : (object.respond_to?(:level) ? object.level : model_name.capitalize) }" %>
 
 <div class="form-actions">
     <% if can? :index, object %>
