@@ -22,6 +22,7 @@ class ShiftsController < ApplicationController
 
     def new
         @shift = Shift.new
+        @shift.employee_id = params[:employee_id] unless params[:employee_id].nil?
     end
     
     def edit

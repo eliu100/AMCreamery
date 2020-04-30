@@ -1,5 +1,5 @@
 <% if f.object.assignment.nil? %>
-    <%= f.input :employee_id, collection: Employee.alphabetical.regulars.active.to_a, include_blank: true %>
+    <%= f.input :employee_id, collection: Employee.alphabetical.regulars.active.to_a, include_blank: true, selected: params[:employee_id] %>
 <% else %>
     <%= f.input :employee_id, collection: Employee.alphabetical.active.to_a, include_blank: true, selected: f.object.assignment.employee_id %>
 <% end %>
