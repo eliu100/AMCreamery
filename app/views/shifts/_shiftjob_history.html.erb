@@ -1,0 +1,42 @@
+
+<% if @shift.status == 'finished'%>
+    <% unless @shiftjobs.empty? %>
+    <div class="card">
+        <div class="card-content">
+        <h5>Jobs Worked</h5>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Name</th>
+            </thead>
+            <% @shiftjobs.each do |job| %>
+            <tr %>
+                <td>
+                <% if can? :show, job %>
+                    <%= link_to job.name, job_path(job) %>
+                <% else %>
+                    <%= job.name %>
+                <% end %>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        </div>
+        <% if can? :create, ShiftJob %>
+        <div class="card-action">
+            <%= link_to "Edit Jobs Worked", edit_shift_path(@shift) %>
+        </div>
+        <% end %>
+    </div>
+    <% else %>
+    <% if can? :create, ShiftJob %>
+        <div class="card grey lighten-3">
+        <div class="card-action">
+            <%= link_to "Edit Jobs Worked", edit_shift_path(@shift) %>
+        </div>
+        </div>
+    <% end %>
+    <% end %>
+<% end %>

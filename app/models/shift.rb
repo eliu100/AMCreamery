@@ -48,6 +48,8 @@ class Shift < ApplicationRecord
   def duration
     (round_minutes(self.end_time) - round_minutes(self.start_time, direction: :down))/3600.0
   end
+
+  attr_accessor :employee_id 
   
   # Callbacks
   # set default end_time (on create only)

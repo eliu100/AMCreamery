@@ -1,4 +1,8 @@
-<%= f.input :assignment_id, label: 'Employee', collection: Employee.alphabetical.active.to_a, include_blank: true %>
+<% if f.object.assignment.nil? %>
+    <%= f.input :employee_id, collection: Employee.alphabetical.regulars.active.to_a, include_blank: true %>
+<% else %>
+    <%= f.input :employee_id, collection: Employee.alphabetical.active.to_a, include_blank: true, selected: f.object.assignment.employee_id %>
+<% end %>
 <% if f.object.date.nil? %>
     <%= f.input :date, label_html: { class: 'active' } %>
 <% else %>
@@ -16,3 +20,6 @@
     <%= f.input :end_time, label_html: { class: 'active' }, input_html: { class: 'timepicker', :value => localize(f.object.end_time, :format => "%I:%M %p")} %>
 <% end %>
 <%= f.input :notes, label_html: { class: 'active' } %>
+<% unless f.object.status.nil? || f.object.status != 'finished' %>
+    <%= f.association :jobs, as: :check_boxes %>
+<% end %> 

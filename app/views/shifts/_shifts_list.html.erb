@@ -1,5 +1,5 @@
 
-    <h5><%= state.capitalize %> Shifts</h5>
+    <h5><%= state.titleize %> Shifts</h5>
 
     <% if shifts.empty? %>
       <p>There are no <%= state.downcase %> shifts at this time.</p>
@@ -9,7 +9,6 @@
         <thead>
           <th>Employee</th>
           <th>Store</th>
-          <th>Status</th>
           <th>Date</th>
           <th>Times</th>
           <th class="align_center">Options</th>
@@ -24,7 +23,6 @@
                     <%= shift.store.name %>
                 <% end %>
             </td>
-            <td><%= shift.status.capitalize %></td>
             <td><%= shift.date.strftime("%-m/%-d") %></td>
             <td><%= shift.start_time.strftime("%l:%M %P") %>- <%= shift.end_time.nil? ? 'Now' : shift.end_time.strftime("%l:%M %P") %></td>
             <td class="align_center">

@@ -17,6 +17,7 @@ class ShiftsController < ApplicationController
     end
 
     def show
+        @shiftjobs = @shift.jobs.alphabetical.paginate(page: params[:page]).per_page(10)
     end
 
     def new
@@ -24,11 +25,12 @@ class ShiftsController < ApplicationController
     end
     
     def edit
+        
     end
     
     def create
         sp = shift_params
-        sp[:assignment_id] = Employee.find(sp[:assignment_id]).current_assignment.id
+        sp[:assignment_id] = Employee.find(sp[:employee_id]).current_assignment.id
         @shift = Shift.new(sp)
         if @shift.save
             redirect_to @shift, notice: "Successfully added shift."
@@ -39,7 +41,7 @@ class ShiftsController < ApplicationController
     
     def update
         sp = shift_params
-        sp[:assignment_id] = Employee.find(sp[:assignment_id]).current_assignment.id
+        sp[:assignment_id] = Employee.find(sp[:employee_id]).current_assignment.id
         if @shift.update_attributes(sp)
           redirect_to @shift, notice: "Updated shift's information."
         else
@@ -60,7 +62,7 @@ class ShiftsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_params
-        params.require(:shift).permit(:assignment_id, :date, :status, :start_time, :end_time, :notes)
+        params.require(:shift).permit(:assignment_id, :employee_id, :date, :status, :start_time, :end_time, :notes, job_ids: [])
     end
 
 end
