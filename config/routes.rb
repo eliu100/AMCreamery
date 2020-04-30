@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :pay_grade_rates
   resources :jobs
   resources :shifts
+  get 'shifts/:id/edit_jobs', to: 'shifts#edit_jobs', as: :edit_shift_jobs
+  patch 'shifts/:id/update_jobs', to: 'shifts#update_jobs', as: :update_shift_jobs
 
   # Custom routes
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment

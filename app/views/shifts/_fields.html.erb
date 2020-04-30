@@ -21,5 +21,5 @@
 <% end %>
 <%= f.input :notes, label_html: { class: 'active' } %>
 <% unless f.object.status.nil? || f.object.status != 'finished' %>
-    <%= f.association :jobs, as: :check_boxes %>
+    <%= f.association :jobs %>
 <% end %> 

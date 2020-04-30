@@ -22,7 +22,10 @@
       <% end %>
 
       <b>Times&nbsp;&nbsp;</b>
-      <%= @shift.start_time.strftime("%l:%M %P") %>- <%= @shift.end_time.nil? ? 'Now' : @shift.end_time.strftime("%l:%M %P") %> 
+      <%= @shift.start_time.strftime("%l:%M %P") %>- <%= @shift.end_time.nil? ? 'Now' : @shift.end_time.strftime("%l:%M %P") %> <br /><br />
+
+      <b>Notes&nbsp;&nbsp;</b>
+      <%= @shift.notes %>
   
     </div>
   </div>

@@ -26,7 +26,7 @@
         </div>
         <% if can? :create, ShiftJob %>
         <div class="card-action">
-            <%= link_to "Edit Jobs Worked", edit_shift_path(@shift) %>
+            <%= link_to "Edit Jobs Worked", edit_shift_jobs_path(@shift) %>
         </div>
         <% end %>
     </div>
@@ -34,7 +34,7 @@
     <% if can? :create, ShiftJob %>
         <div class="card grey lighten-3">
         <div class="card-action">
-            <%= link_to "Edit Jobs Worked", edit_shift_path(@shift) %>
+            <%= link_to "Edit Jobs Worked", edit_shift_jobs_path(@shift) %>
         </div>
         </div>
     <% end %>

@@ -1,3 +1,44 @@
-<%= render partial: 'partials/form_structure', locals: {object: @shift, 
-                                                        type_of_form: 'Shift',
-                                                        fields: 'fields'} %>
+<div class="row">
+  <div class="col s9">
+    <div class="card">    
+      <div class="card-content">
+        <span class="card-title">Shift</span>
+        <%= simple_form_for(@shift) do |f| %>
+          <%= f.error_notification %>
+          <div class="row">
+            <div class="form-inputs">
+            <% if f.object.assignment.nil? %>
+                <%= f.input :employee_id, collection: Employee.alphabetical.regulars.active.to_a, include_blank: true %>
+            <% else %>
+                <%= f.input :employee_id, collection: Employee.alphabetical.active.to_a, include_blank: true, selected: f.object.assignment.employee_id %>
+            <% end %>
+            <% if f.object.date.nil? %>
+                <%= f.input :date, label_html: { class: 'active' } %>
+            <% else %>
+                <%= f.input :date, label_html: { class: 'active' }, input_html: { :value => localize(f.object.date, :format => "%b %-d, %Y")} %>
+            <% end %>
+            <%= f.input :status, collection: Shift::STATUS_LIST, include_blank: true %>
+            <% if f.object.start_time.nil? %>
+                <%= f.input :start_time, label_html: { class: 'active' }, input_html: { class: 'timepicker'} %>
+            <% else %>
+                <%= f.input :start_time, label_html: { class: 'active' }, input_html: { class: 'timepicker', :value => localize(f.object.start_time, :format => "%I:%M %p")} %>
+            <% end %>
+            <% if f.object.end_time.nil? %>
+                <%= f.input :end_time, label_html: { class: 'active' }, input_html: { class: 'timepicker'} %>
+            <% else %>
+                <%= f.input :end_time, label_html: { class: 'active' }, input_html: { class: 'timepicker', :value => localize(f.object.end_time, :format => "%I:%M %p")} %>
+            <% end %>
+            <%= f.input :notes, label_html: { class: 'active' } %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="form-actions col s9">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= link_to 'Back', :back %>

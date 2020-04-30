@@ -1,5 +1,5 @@
 class ShiftsController < ApplicationController
-    before_action :set_shift, only: [:show, :edit, :update, :destroy]
+    before_action :set_shift, only: [:show, :edit, :edit_jobs, :update, :update_jobs, :destroy]
     before_action :check_login
     authorize_resource
 
@@ -25,7 +25,15 @@ class ShiftsController < ApplicationController
     end
     
     def edit
-        
+    end
+
+    def edit_jobs
+    end
+
+    def update_jobs
+        sp = shift_params
+        @shift.update_attribute(:job_ids, sp[:job_ids])
+        redirect_to @shift, notice: "Updated jobs performed during shift."
     end
     
     def create
