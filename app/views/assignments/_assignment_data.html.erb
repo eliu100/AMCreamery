@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-content">
+    <h5><b>Employee&nbsp;&nbsp;</b>
+      <%= link_to @assignment.employee.name, employee_path(@assignment.employee) %><br /><br />
+
+    <b>Store&nbsp;&nbsp;</b>
+      <% if can? :show, @assignment.store %>
+          <%= link_to @assignment.store.name, store_path(@assignment.store) %>
+      <% else %>
+          <%= @assignment.store.name %>
+      <% end %></h5><br /><br />
+
+    <b>Paygrade&nbsp;&nbsp;</b>
+      <% if can? :show, @assignment.pay_grade %>
+          <%= link_to @assignment.pay_grade.level, pay_grade_path(@assignment.pay_grade) %>
+      <% else %>
+          <%= @assignment.pay_grade.level %>
+      <% end %></h5><br /><br />
+
+    <b>Dates:&nbsp;&nbsp;</b><br>
+      <%= @assignment.start_date.strftime("%-m/%-d/%y") %> - <%= @assignment.end_date.nil? ? 'Present' : @assignment.end_date.strftime("%-m/%-d/%y") %><br /><br />
+
+  </div>
+</div>

@@ -13,7 +13,7 @@
           <%= @employee.current_assignment.store.name %>
         <% end %>
         <br />
-        since <%= @employee.current_assignment.start_date.strftime("%b %-d, %Y") %><br /><br />
+        since <%= link_to @employee.current_assignment.start_date.strftime("%b %-d, %Y"), assignment_path(@employee.current_assignment) %><br /><br />
 
       <% end %>
 

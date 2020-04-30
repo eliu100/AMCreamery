@@ -1,6 +1,6 @@
 <% if shifts.empty? %>
     <br/>
-    <p>There are no shifts in the <%= state.downcase %> 7 days for this employee. </p>
+    <p>There are no <%= state.downcase %> shifts for this assignment. </p>
     <br/>
     <% if can? :create, Shift %>
         <div class="card-action">

@@ -10,9 +10,7 @@
           <th>Employee Name</th>
           <th>Store Name</th>
           <th>Dates</th>
-          <% if (can? :edit, Assignment) || (can? :destroy, Assignment) %>
-            <th>Options</th>
-          <% end %>
+          <th>Options</th>
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
@@ -31,23 +29,25 @@
               <% end %>
             </td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
-            <% if (can? :edit, Assignment) || (can? :destroy, Assignment) %>
-              <td>
-                <% if state.downcase == 'current' %>
-                  <% if can? :edit, assignment %>
-                    <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
-                      <i class="material-icons">stop</i>
-                    <% end %>
+            <td>
+              <%= link_to assignment_path(assignment) do %>
+                <i class="material-icons">pageview</i>
+              <% end %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <% if state.downcase == 'current' %>
+                <% if can? :edit, assignment %>
+                  <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
+                    <i class="material-icons">stop</i>
                   <% end %>
                 <% end %>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <% if can? :destroy, assignment %>
-                  <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
-                      <i class="material-icons">delete</i>
-                  <% end %>
+              <% end %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <% if can? :destroy, assignment %>
+                <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
+                    <i class="material-icons">delete</i>
                 <% end %>
-              </td>
-            <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>

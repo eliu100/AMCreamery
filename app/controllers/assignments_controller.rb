@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: [:show, :edit, :terminate, :destroy]
+  before_action :set_assignment, only: [:show, :edit, :update, :terminate, :destroy]
   before_action :check_login
   authorize_resource
 
@@ -14,6 +14,11 @@ class AssignmentsController < ApplicationController
         @current_assignments = @current_assignments.where(employee_id: current_user.id)
         @past_assignments = @past_assignments.where(employee_id: current_user.id)
       end
+  end
+
+  def show
+    @upcoming_shifts = @assignment.shifts.upcoming.chronological.paginate(page: params[:page]).per_page(10)
+    @past_shifts = @assignment.shifts.past.chronological.paginate(page: params[:page]).per_page(10)
   end
 
   def new
