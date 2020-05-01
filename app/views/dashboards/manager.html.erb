@@ -15,15 +15,17 @@
         <div class="card">
         <div class="card_content">
         <table class="striped highlight">
-        <caption><h5>Employees Working Today</h5></caption>
+        <caption><h5>Shifts in the Upcoming Week</h5></caption>
         <thead>
-            <th>Name</th>
+            <th>Employee</th>
+            <th>Date</th>
             <th>Start Time</th>
             <th class="align_center">View</th>
         </thead>
         <% for shift in @today_shifts %>
             <tr>
                 <td><%= link_to shift.employee.name, employee_path(shift.employee)%></td>
+                <td><%= shift.date.strftime("%b %-d, %Y") %>
                 <td><%= shift.start_time.strftime("%l:%M %P") %>
                 <td class="align_center">
                   <%= link_to shift_path(shift) do %>

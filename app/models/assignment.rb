@@ -37,6 +37,10 @@ class Assignment < ApplicationRecord
     self.reload
   end
 
+  def name
+    self.employee.name + " at " + self.store.name + " store"
+  end
+
   # Callbacks
   before_create :end_previous_assignment
 

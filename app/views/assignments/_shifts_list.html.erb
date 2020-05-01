@@ -4,7 +4,7 @@
     <br/>
     <% if can? :create, Shift %>
         <div class="card-action">
-            <%= link_to "New Shift", new_shift_path(employee_id: @assignment.employee_id) %>
+            <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
         </div>
     <% end %>
 <% else %>
@@ -35,7 +35,7 @@
 
     <% if can? :create, Shift %>
         <div class="card-action">
-            <%= link_to "New Shift", new_shift_path %>
+            <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
         </div>
     <% end %>
 <% end %>

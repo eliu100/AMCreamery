@@ -6,7 +6,7 @@
         <% if can? :create, Shift %>
             <div class="card grey lighten-3">
                 <div class="card-action">
-                    <%= link_to "New Shift", new_shift_path %>
+                    <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
                 </div>
             </div>
         <% end %>

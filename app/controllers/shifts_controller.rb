@@ -22,7 +22,7 @@ class ShiftsController < ApplicationController
 
     def new
         @shift = Shift.new
-        @shift.employee_id = params[:employee_id] unless params[:employee_id].nil?
+        @shift.assignment_id = params[:assignment_id] unless params[:assignment_id].nil?
     end
     
     def edit
@@ -38,9 +38,7 @@ class ShiftsController < ApplicationController
     end
     
     def create
-        sp = shift_params
-        sp[:assignment_id] = Employee.find(sp[:employee_id]).current_assignment.id
-        @shift = Shift.new(sp)
+        @shift = Shift.new(shift_params)
         if @shift.save
             redirect_to @shift, notice: "Successfully added shift."
         else
@@ -49,9 +47,7 @@ class ShiftsController < ApplicationController
     end
     
     def update
-        sp = shift_params
-        sp[:assignment_id] = Employee.find(sp[:employee_id]).current_assignment.id
-        if @shift.update_attributes(sp)
+        if @shift.update_attributes(shift_params)
           redirect_to @shift, notice: "Updated shift's information."
         else
           render action: 'edit'
@@ -71,7 +67,7 @@ class ShiftsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_params
-        params.require(:shift).permit(:assignment_id, :employee_id, :date, :status, :start_time, :end_time, :notes, job_ids: [])
+        params.require(:shift).permit(:assignment_id, :date, :status, :start_time, :end_time, :notes, job_ids: [])
     end
 
 end
