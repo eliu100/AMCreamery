@@ -44,6 +44,7 @@ class DashboardsController < ApplicationController
         @upcoming_shifts = emp.shifts.for_next_days(7).chronological.paginate(page: params[:page]).per_page(10)
         @payreport = PayrollCalculator.new(DateRange.new(7.days.ago.to_date)).create_payroll_record_for(emp)
         @today_shift = emp.shifts.for_dates(DateRange.new(Date.today)).pending
+        @started_shift = emp.shifts.for_dates(DateRange.new(Date.today)).started
     end 
 
 end

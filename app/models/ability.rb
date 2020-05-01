@@ -48,6 +48,12 @@ class Ability
       can :update, Employee do |employee|
         employee.id == user.id
       end
+      can :clock_in, Employee do |employee|
+        employee.id == user.id
+      end
+      can :clock_out, Employee do |employee|
+        employee.id == user.id
+      end
     else
     end
 

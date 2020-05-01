@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :clock_in, :clock_out, :destroy]
   before_action :check_login
   authorize_resource
 
@@ -51,6 +51,24 @@ class EmployeesController < ApplicationController
       else
         render action: 'edit'
       end
+    end
+  end
+
+  def clock_in
+    @today_shift = @employee.shifts.for_dates(DateRange.new(Date.today)).pending
+    unless @today_shift.empty?
+      tc = TimeClock.new(@today_shift.first)
+      tc.start_shift_at(Time.now)
+      redirect_to employee_dashboard_path
+    end
+  end
+
+  def clock_out
+    @started_shift = @employee.shifts.for_dates(DateRange.new(Date.today)).started
+    unless @started_shift.empty?
+      tc = TimeClock.new(@started_shift.first)
+      tc.end_shift_at(Time.now)
+      redirect_to employee_dashboard_path
     end
   end
 

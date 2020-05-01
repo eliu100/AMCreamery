@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   # Resource routes (maps HTTP verbs to controller actions automatically):
   resources :employees
+  patch 'employees/:id/clockin', to: 'employees#clock_in', as: :clock_in
+  patch 'employees/:id/clockout', to: 'employees#clock_out', as: :clock_out
   resources :stores
   get 'stores/:id/edit_dates', to: 'stores#edit_dates', as: :edit_store_dates
   get 'stores/:id/payroll', to: 'stores#show_payroll', as: :store_payroll
