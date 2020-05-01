@@ -3,7 +3,7 @@
         <div class="card">
         <div class="card-content">
         <p>There are no shifts in the last or next 7 days for this employee.</p>
-        <% if can? :create, Shift %>
+        <% if (can? :create, Shift) && !@employee.current_assignment.nil? %>
             <div class="card grey lighten-3">
                 <div class="card-action">
                     <%= link_to "New Shift", new_shift_path %>
