@@ -30,4 +30,13 @@ class DashboardsController < ApplicationController
         @stores = @stores.paginate(page: params[:page]).per_page(5)
     end
 
+    def manager
+        curr_store = current_user.current_assignment.store
+        @today_shifts = Shift.for_store(curr_store).for_dates(DateRange.new(Date.today)).chronological.paginate(page: params[:page]).per_page(5)
+        @no_jobs_shifts = Shift.for_store(curr_store).finished.incomplete.chronological.paginate(page: params[:page]).per_page(5)
+        active_employees = Employee.regulars.active.alphabetical.paginate(page: params[:page]).per_page(10)
+        arr = curr_store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}
+        @emps = active_employees.where(id: arr.map(&:id))
+    end
+
 end

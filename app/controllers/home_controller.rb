@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
   def index
-    if (!current_user.nil?) && (current_user.role? :admin)
-      redirect_to admin_dashboard_path
+    unless current_user.nil?
+      if current_user.role? :admin
+        redirect_to admin_dashboard_path
+      elsif current_user.role? :manager
+        redirect_to manager_dashboard_path
+      end
     end
   end
 
