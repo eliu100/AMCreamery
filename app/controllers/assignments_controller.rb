@@ -41,7 +41,7 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(assignment_params)
     if @assignment.save
-      redirect_to assignments_path, notice: "Successfully added the assignment."
+      redirect_to @assignment, notice: "Successfully added the assignment."
     else
       render action: 'new'
     end
@@ -49,7 +49,7 @@ class AssignmentsController < ApplicationController
 
   def terminate
     if @assignment.terminate
-      redirect_to assignments_path, notice: "Assignment for #{@assignment.employee.proper_name} terminated."
+      redirect_to @assignment, notice: "Assignment for #{@assignment.employee.proper_name} terminated."
     end
   end
 

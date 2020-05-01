@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
 
-  before_action :set_store, only: [:show, :edit, :update, :destroy]
+  before_action :set_store, only: [:show, :show_payroll, :edit, :edit_dates, :update, :destroy]
   before_action :check_login
   authorize_resource
 
@@ -19,11 +19,18 @@ class StoresController < ApplicationController
     @upcoming_shifts = @store.shifts.for_next_days(7).chronological.paginate(page: params[:page]).per_page(10)
   end
 
+  def show_payroll
+    @payroll = @store.gen_payroll(store_params[:start_date].to_date, store_params[:end_date].to_date)
+  end
+
   def new
     @store = Store.new
   end
 
   def edit
+  end
+
+  def edit_dates
   end
 
   def create
@@ -51,7 +58,7 @@ class StoresController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def store_params
-    params.require(:store).permit(:name, :street, :city, :phone, :state, :zip, :active)
+    params.require(:store).permit(:name, :street, :city, :phone, :state, :zip, :active, :start_date, :end_date)
   end
 
 end

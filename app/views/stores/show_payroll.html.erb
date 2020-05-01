@@ -1,0 +1,16 @@
+<table class="striped highlight">
+        <thead>
+          <th>Employee</th>
+          <th>Hours Worked</th>
+          <th>Payrate</th>
+          <th>Total Pay</th>
+        </thead>
+        <% @payroll.each do |p| %>
+          <tr>
+            <td><%= p.employee_name %></td>
+            <td><%= p.hours %></td>
+            <td><%= number_to_currency p.pay_rate %></td>
+            <td><%= number_to_currency p.pay_earned %></td>
+          </tr>
+        <% end %>
+      </table>

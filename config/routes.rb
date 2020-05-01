@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # Resource routes (maps HTTP verbs to controller actions automatically):
   resources :employees
   resources :stores
+  get 'stores/:id/edit_dates', to: 'stores#edit_dates', as: :edit_store_dates
+  get 'stores/:id/payroll', to: 'stores#show_payroll', as: :store_payroll
   resources :assignments
   resources :sessions
   resources :pay_grades
