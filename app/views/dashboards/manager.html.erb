@@ -73,5 +73,35 @@
       </div>
       </div>
     </div>
-
+    <div class = "col s6">
+        <div class="card">
+        <div class="card-content">
+        <span class="card-title">Assign Shifts to Employees</span>
+        <% if @emps.empty? %>
+            <br/>
+            <p>There are no employees at the store.</p>
+        <% else %>
+            <table class="striped highlight">
+            <thead>
+            <th>Name</th>
+            <th>Phone</th>
+            <th class="align_center">Assign Shift</th>
+            </thead>
+            <% for employee in @emps %>
+                <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+                    <td><%= link_to employee.name, employee_path(employee)%></td>
+                    <td><%= number_to_phone employee.phone %></td>
+                    <td class="align_center">
+                    <%= link_to new_shift_path(employee_id: employee.id) do %>
+                        <i class="material-icons">add</i>
+                    <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+        <%= will_paginate @emps, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+      <% end %>
+      </div>
+      </div>
+    </div>
 </div>
