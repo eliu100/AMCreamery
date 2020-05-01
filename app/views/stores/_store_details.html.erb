@@ -28,10 +28,13 @@
     <p>
       <b>Active:</b> 
       <%= @store.active ? "Yes" : "No" %>
-    </p><br /><br/>
+    </p>
 
-    <%= link_to(eval("edit_store_dates_path(@store)"), class: 'waves-effect waves-light btn') do %>
-          &nbsp;<%= "Generate Payroll for #{@store.name}" %>
+    <% if current_user.role? :admin %>
+      <br /><br/>
+      <%= link_to(eval("edit_store_dates_path(@store)"), class: 'waves-effect waves-light btn') do %>
+            &nbsp;<%= "Generate Payroll for #{@store.name}" %>
+      <% end %>
     <% end %>
   </div>
 </div>

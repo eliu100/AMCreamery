@@ -35,4 +35,6 @@
 </div>
 
 <!-- Add a button for new instances of object -->
-<%= render :partial => 'partials/add_new_object', locals: {model_name: model_name} %>
+<% if can? :create, object_class %>
+  <%= render :partial => 'partials/add_new_object', locals: {model_name: model_name} %>
+<% end %>
