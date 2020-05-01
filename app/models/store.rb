@@ -26,11 +26,6 @@ class Store < ApplicationRecord
 
   attr_accessor :start_date, :end_date
 
-  def gen_payroll(start_d, end_d)
-    p = PayrollCalculator.new(DateRange.new(start_d, end_d))
-    p.create_payrolls_for(self)
-  end
-
   # Callbacks
   before_save    -> { strip_nondigits_from(:phone) }
   before_destroy -> { cannot_destroy_object() }

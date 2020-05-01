@@ -1,16 +1,25 @@
-<table class="striped highlight">
+<div class="card">
+<div class="card-content">
+<span class="card-title">Payroll for <%= @store.name %> Store <br/>from <%= @calc.start_date.strftime("%b %-d, %Y") %> to <%= @calc.end_date.strftime("%b %-d, %Y") %></span>
+    <% if @payroll.empty? %>
+        <p>The payroll is empty.</p>
+    <% else %>
+        <table class="striped highlight">
         <thead>
-          <th>Employee</th>
-          <th>Hours Worked</th>
-          <th>Payrate</th>
-          <th>Total Pay</th>
+            <th>Employee</th>
+            <th>Hours Worked</th>
+            <th>Payrate</th>
+            <th>Total Pay</th>
         </thead>
         <% @payroll.each do |p| %>
-          <tr>
-            <td><%= p.employee_name %></td>
-            <td><%= p.hours %></td>
-            <td><%= number_to_currency p.pay_rate %></td>
-            <td><%= number_to_currency p.pay_earned %></td>
-          </tr>
+            <tr>
+                <td><%= p.employee_name %></td>
+                <td><%= p.hours %></td>
+                <td><%= number_to_currency p.pay_rate %></td>
+                <td><%= number_to_currency p.pay_earned %></td>
+            </tr>
         <% end %>
-      </table>
+        </table>
+    <% end %>
+    </div>
+</div>

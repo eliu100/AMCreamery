@@ -20,7 +20,8 @@ class StoresController < ApplicationController
   end
 
   def show_payroll
-    @payroll = @store.gen_payroll(store_params[:start_date].to_date, store_params[:end_date].to_date)
+    @calc = PayrollCalculator.new(DateRange.new(store_params[:start_date].to_date, store_params[:end_date].to_date))
+    @payroll = @calc.create_payrolls_for(@store)
   end
 
   def new

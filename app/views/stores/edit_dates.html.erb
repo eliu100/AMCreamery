@@ -2,7 +2,7 @@
   <div class="col s8">
     <div class="card">    
       <div class="card-content">
-        <span class="card-title">bob</span>
+        <span class="card-title">Generate Payroll</span>
         <%= simple_form_for @store, :url => store_payroll_path(@store), :method => 'get' do |f| %>
           <%= f.error_notification %>
           <div class="row">
@@ -15,7 +15,7 @@
     </div>
       <div class="row">
         <div class="form-actions col s8">
-          <%= f.button :submit, "Generate Payroll" %>
+          <%= f.button :submit, "Generate" %>
         </div>
       </div>
     <% end %>
