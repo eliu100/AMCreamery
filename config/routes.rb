@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'admin', to: 'dashboards#admin', as: :admin_dashboard
   get 'manager', to: 'dashboards#manager', as: :manager_dashboard
+  get 'emp', to: 'dashboards#employee', as: :employee_dashboard
 
   # Resource routes (maps HTTP verbs to controller actions automatically):
   resources :employees

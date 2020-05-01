@@ -5,6 +5,8 @@ class HomeController < ApplicationController
         redirect_to admin_dashboard_path
       elsif current_user.role? :manager
         redirect_to manager_dashboard_path
+      elsif current_user.role? :employee
+        redirect_to employee_dashboard_path
       end
     end
   end
