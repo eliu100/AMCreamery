@@ -94,7 +94,7 @@
                     <td><%= link_to employee.name, employee_path(employee)%></td>
                     <td><%= number_to_phone employee.phone %></td>
                     <td class="align_center">
-                    <%= link_to new_shift_path(employee_id: employee.id) do %>
+                    <%= link_to new_shift_path(assignment_id: employee.current_assignment.id) do %>
                         <i class="material-icons">add</i>
                     <% end %>
                     </td>
