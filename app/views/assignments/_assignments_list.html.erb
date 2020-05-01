@@ -10,7 +10,7 @@
           <th>Employee Name</th>
           <th>Store Name</th>
           <th>Dates</th>
-          <th>Options</th>
+          <th class="align_center">Options</th>
         </thead>
         <% assignments.each do |assignment| %>
           <tr %>
@@ -29,7 +29,7 @@
               <% end %>
             </td>
             <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
-            <td>
+            <td class="align_center">
               <%= link_to assignment_path(assignment) do %>
                 <i class="material-icons">pageview</i>
               <% end %>

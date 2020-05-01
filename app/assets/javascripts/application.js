@@ -36,6 +36,7 @@ $(document).ready(function() {
 $(document).ready(function(){
   $('.tabs').tabs();
   $('.timepicker').timepicker();
+  $('.collapsible').collapsible();
 });
 
 // Search submit on enter

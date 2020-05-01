@@ -1,1 +1,76 @@
-<h1>haroot</h1>
+<div class = row>
+    <div class = "col s4 offset-s1">
+        <table class="striped highlight">
+        <caption><h5>Stores with Absent Employees</h5></caption>
+        <thead>
+          <th>Name</th>
+          <th class="align_center">Employees with Missed Shifts</th>
+        </thead>
+        <% @bad.sort{|a, b| b[1] <=> a[1]}.each_with_index do |arr, i| %>
+            <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+                <td class="collapsible">
+                <% if i == 0 %>
+                <li class="active" style="list-style-type:none">
+                <% else %>
+                <li style="list-style-type:none">
+                <% end %>
+                    <div class="collapsible-header"><%= link_to arr[0].name, store_path(arr[0]) %></div>
+                    <div class="collapsible-body">
+                        <table class="striped highlight">
+                        <thead>
+                            <th>Employee</th>
+                            <th>Shifts Missed</th>
+                        </thead>
+                        <% arr[2].sort_by{|k, v| -v}.each do |emp, count| %>
+                            <tr>
+                                <td><%= link_to emp.name, employee_path(emp) %></td>
+                                <td><%= count %></td>
+                            </tr>
+                        <% end %>
+                        </table>
+                    </div>
+                </li>
+                </td>
+                <td class="align_center"><%= arr[1] %></td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class = "col s4 offset-s2">
+        <table class="striped highlight">
+        <caption><h5>Stores with Underage Employees</h5></caption>
+        <thead>
+          <th>Name</th>
+          <th class="align_center">Underage Employees</th>
+        </thead>
+        <% @unemp.sort{|a, b| b[1].count <=> a[1].count}.each_with_index do |arr, i| %>
+          <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+                <td class="collapsible">
+                <% if i == 0 %>
+                <li class="active" style="list-style-type:none">
+                <% else %>
+                <li style="list-style-type:none">
+                <% end %>
+                    <div class="collapsible-header"><%= link_to arr[0].name, store_path(arr[0]) %></div>
+                    <div class="collapsible-body">
+                        <table class="striped highlight">
+                        <thead>
+                            <th>Employee</th>
+                            <th>Age</th>
+                        </thead>
+                        <% arr[1].each do |emp| %>
+                            <tr>
+                                <td><%= link_to emp.name, employee_path(emp) %></td>
+                                <td><%= emp.age %></td>
+                            </tr>
+                        <% end %>
+                        </table>
+                    </div>
+                </li>
+                </td>
+                <td class="align_center"><%= arr[1].count %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+</div>
