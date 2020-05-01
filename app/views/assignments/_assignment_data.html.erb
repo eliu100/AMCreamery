@@ -18,7 +18,7 @@
       <% end %></h5><br /><br />
 
     <b>Dates:&nbsp;&nbsp;</b><br>
-      <%= @assignment.start_date.strftime("%-m/%-d/%y") %> - <%= @assignment.end_date.nil? ? 'Present' : @assignment.end_date.strftime("%-m/%-d/%y") %><br /><br />
+      <%= @assignment.start_date.strftime("%b %-d, %Y") %> - <%= @assignment.end_date.nil? ? 'Present' : @assignment.end_date.strftime("%b %-d, %Y") %><br /><br />
 
   </div>
 </div>

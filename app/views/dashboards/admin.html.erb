@@ -2,10 +2,14 @@
     <div class = "col s4">
         <div class = "card">
             <div class="card-content">
-                <h4> Quick Links </h4>
+                <h3> Quick Links </h3>
                 <div class="card-action">
                     <%= link_to "New Employee", new_employee_path %><br/><br/>
-                    <%= link_to "New Payrate", new_pay_grade_rate_path %>
+                    <%= link_to "New Payrate", new_pay_grade_rate_path %><br/><br/><br/>
+                    <b> Employee Search </b>
+                    <%= form_with url: search_path, method: :get, class: "form-inline", id: "search" do %>
+                        <%= text_field_tag 'query', '', placeholder: "Search ..." %>
+                    <% end %><br/>
                 </div>
             </div>
         </div>

@@ -13,11 +13,11 @@
         <% @previous_rates.each do |pgr| %>
           <tr %>
             <td><%= number_to_currency pgr.rate %></td>
-            <td><%= pgr.start_date.strftime("%-m/%-d/%y") %> - 
+            <td><%= pgr.start_date.strftime("%b %-d, %Y") %> - 
               <% if pgr.end_date.nil? %>
-                current
+                present
               <% else %>
-                <%= pgr.end_date.strftime("%-m/%-d/%y") %>
+                <%= pgr.end_date.strftime("%b %-d, %Y") %>
               <% end %>
             </td>
           </tr>

@@ -60,7 +60,7 @@ class ShiftsController < ApplicationController
 
     def destroy
         @shift.destroy
-        redirect_to shifts_path, notice: "Removed job from the system."
+        redirect_to shifts_path, notice: "Removed shift from the system."
       end
 
     private

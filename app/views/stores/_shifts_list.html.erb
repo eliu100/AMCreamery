@@ -16,7 +16,7 @@
         <% shifts.each do |shift| %>
           <tr %>
             <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
-            <td><%= shift.date.strftime("%-m/%-d") %></td>
+            <td><%= shift.date.strftime("%b %-d, %Y") %></td>
             <td><%= shift.start_time.strftime("%l:%M %P") %></td>
             <td>
               <%= link_to shift_path(shift) do %>
