@@ -1,7 +1,15 @@
+
 <div class="row">
   <div class="small-8 columns">
     <div class="card">
       <div class="card-content">
+        <% if model_name == 'employee'%>
+          <% if can? :index, Employee %>
+            <%= form_with url: search_path, method: :get, class: "form-inline", id: "search" do %>
+              <%= text_field_tag 'query', '', placeholder: "Search ..." %>
+            <% end %>
+          <% end %>
+        <% end %>
         <% unless secondary.nil? %>
           
           <ul class="tabs">

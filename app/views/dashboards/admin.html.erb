@@ -1,7 +1,49 @@
-<div class = row>
-    <div class = "col s4 offset-s1">
+<div class = "row">
+    <div class = "col s4">
+        <div class = "card">
+            <div class="card-content">
+                <h4> Quick Links </h4>
+                <div class="card-action">
+                    <%= link_to "New Employee", new_employee_path %><br/><br/>
+                    <%= link_to "New Payrate", new_pay_grade_rate_path %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "col s8">
+        <div class="card">
+        <div class="card_content">
         <table class="striped highlight">
-        <caption><h5>Stores with Absent Employees</h5></caption>
+        <caption><h5>Generate Payroll for Stores</h5></caption>
+        <thead>
+            <th>Name</th>
+            <th class="align_center">Generate Payroll</th>
+        </thead>
+        <% for store in @stores %>
+            <tr>
+                <td><%= link_to store.name, store_path(store)%></td>
+                <td class="align_center">
+                  <%= link_to store_path(store) do %>
+                    <i class="material-icons">attach_money</i>
+                  <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </table>
+        <br />
+        <%= will_paginate @stores, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+        <br />
+        </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+<div class = "row">
+    <div class = "col s6">
+        <div class="card">
+        <div class="card-content">
+        <table class="striped highlight">
+        <caption><h5>Slackers in the Past 2 Weeks</h5></caption>
         <thead>
           <th>Name</th>
           <th class="align_center">Employees with Missed Shifts</th>
@@ -35,8 +77,12 @@
             </tr>
         <% end %>
       </table>
+      </div>
+      </div>
     </div>
-    <div class = "col s4 offset-s2">
+    <div class = "col s6">
+        <div class="card">
+        <div class="card-content">
         <table class="striped highlight">
         <caption><h5>Stores with Underage Employees</h5></caption>
         <thead>
@@ -72,5 +118,7 @@
           </tr>
         <% end %>
       </table>
+      </div>
+      </div>
     </div>
 </div>

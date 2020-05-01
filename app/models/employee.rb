@@ -20,6 +20,7 @@ class Employee < ApplicationRecord
   scope :managers,        -> { where('role = ?', 'manager') }
   scope :admins,          -> { where('role = ?', 'admin') }
   scope :alphabetical,    -> { order('last_name, first_name') }
+  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ?', "#{term}%", "#{term}%") }
 
   # Validations
   validates_presence_of :first_name, :last_name, :ssn
