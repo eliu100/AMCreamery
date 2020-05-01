@@ -20,8 +20,20 @@ class StoresController < ApplicationController
   end
 
   def show_payroll
-    @calc = PayrollCalculator.new(DateRange.new(store_params[:start_date].to_date, store_params[:end_date].to_date))
-    @payroll = @calc.create_payrolls_for(@store)
+    if params[:commit] == 'Last 2 Weeks'
+      @calc = PayrollCalculator.new(DateRange.new(2.weeks.ago.to_date, nil))
+    elsif params[:commit] == 'Last Month'
+      @calc = PayrollCalculator.new(DateRange.new(1.month.ago.to_date, nil))
+    else 
+      if store_params[:start_date] == '' && store_params[:end_date] == ''
+        redirect_to edit_store_dates_path(@store), alert: "No Dates were provided"
+      else
+        @calc = PayrollCalculator.new(DateRange.new(store_params[:start_date].to_date, store_params[:end_date].to_date))
+      end
+    end
+    unless @calc.nil?
+      @payroll = @calc.create_payrolls_for(@store)
+    end
   end
 
   def new

@@ -1,28 +1,38 @@
 <div class="row">
-  <div class="col s8">
+  <div class="col s9">
     <div class="card">    
       <div class="card-content">
-        <span class="card-title">Generate Payroll</span>
+        <span class="card-title">Generate Payroll</span><br/>
+        <p>
+          <b>Store:</b><br>
+          <%= @store.name %>
+        </p><br />
+        <p>
+          <b>Date:</b><br>
+        </p>
         <%= simple_form_for @store, :url => store_payroll_path(@store), :method => 'get' do |f| %>
           <%= f.error_notification %>
           <div class="row">
             <div class="form-inputs">
-                <%= f.input :start_date, as: :date %>
-                <%= f.input :end_date, as: :date %>
+                <%= f.button :submit, "Last 2 Weeks" %><br/><br/>
+                <%= f.button :submit, "Last Month" %><br/><br/>
+                <ul class = "collapsible popout">
+                <li>
+                <div class = "collapsible-header">Cusom Daterange</div>
+                <div class="collapsible-body">
+                <table>
+                <tr><%= f.input :start_date, as: :date %></tr>
+                <tr><%= f.input :end_date, as: :date %></tr><br/><br/><br/><br/><br/><br/><br/><br/><br/> <!-- these <br/>'s makes the formatting work somehow -->
+                <tr><%= f.button :submit, "Use Custom Daterange"%></tr>
+                </table>
+                </div>
+                </li>
+                </ul>
           </div>
         </div>
       </div>
     </div>
-      <div class="row">
-        <div class="form-actions col s8">
-          <%= f.button :submit, "Generate" %>
-        </div>
-      </div>
     <% end %>
-  </div>
-  <div class="col s4">
-    <h4>For Store:</h4>
-    <h5>Name: <%= @store.name %></h5>
   </div>
 </div>
 <%= link_to 'Back', :back %>
