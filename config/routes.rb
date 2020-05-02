@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # Semi-static page routes
   get 'home', to: 'home#index', as: :home
+  get 'home/dashboard', to: 'home#dashboard', as: :dashboard
   get 'home/about', to: 'home#about', as: :about
   get 'home/contact', to: 'home#contact', as: :contact
   get 'home/privacy', to: 'home#privacy', as: :privacy
