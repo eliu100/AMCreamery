@@ -1,11 +1,11 @@
 <% unless @today_shift.empty? && @started_shift.empty? %>
     <div class="row">
-        <div class = "col s4 offset-s4">
+        <div class = "col s2 offset-s5">
             <% unless @today_shift.empty? || @today_shift.first.end_time.hour < Time.now.hour %>
-                <%= button_to "Clock In", clock_in_path(current_user), method: "patch" %>
+                <div class = "waves-effect waves-light btn-large"><%= button_to "Clock In", clock_in_path(current_user), method: "patch" %></div>
             <% end %>
             <% unless @started_shift.empty? %>
-                <%= button_to "Clock Out", clock_out_path(current_user), method: "patch" %>
+                <div class = "waves-effect waves-light btn-large"><%= button_to "Clock Out", clock_out_path(current_user), method: "patch" %></div>
             <% end %>
         </div>
     </div>
