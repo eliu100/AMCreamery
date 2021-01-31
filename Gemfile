@@ -46,6 +46,7 @@ gem 'will_paginate'
 gem 'jquery-rails', '4.3.1'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'factory_bot_rails'
+gem 'faker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -60,7 +61,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'hirb'
-  gem 'faker'
   gem 'populator'
   gem 'simplecov'
   gem 'shoulda', '3.5.0'
