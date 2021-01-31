@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_020137) do
+ActiveRecord::Schema.define(version: 2021_01_31_045336) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.integer "employee_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "employee_id", null: false
     t.date "start_date"
     t.date "end_date"
-    t.integer "pay_grade_id", null: false
+    t.bigint "pay_grade_id", null: false
     t.index ["employee_id"], name: "index_assignments_on_employee_id"
     t.index ["pay_grade_id"], name: "index_assignments_on_pay_grade_id"
     t.index ["store_id"], name: "index_assignments_on_store_id"
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_11_24_020137) do
   end
 
   create_table "pay_grade_rates", force: :cascade do |t|
-    t.integer "pay_grade_id", null: false
+    t.bigint "pay_grade_id", null: false
     t.float "rate"
     t.date "start_date"
     t.date "end_date"
@@ -55,14 +58,14 @@ ActiveRecord::Schema.define(version: 2019_11_24_020137) do
   end
 
   create_table "shift_jobs", force: :cascade do |t|
-    t.integer "shift_id", null: false
-    t.integer "job_id", null: false
+    t.bigint "shift_id", null: false
+    t.bigint "job_id", null: false
     t.index ["job_id"], name: "index_shift_jobs_on_job_id"
     t.index ["shift_id"], name: "index_shift_jobs_on_shift_id"
   end
 
   create_table "shifts", force: :cascade do |t|
-    t.integer "assignment_id", null: false
+    t.bigint "assignment_id", null: false
     t.date "date"
     t.time "start_time"
     t.time "end_time"
@@ -81,4 +84,11 @@ ActiveRecord::Schema.define(version: 2019_11_24_020137) do
     t.boolean "active"
   end
 
+  add_foreign_key "assignments", "employees"
+  add_foreign_key "assignments", "pay_grades"
+  add_foreign_key "assignments", "stores"
+  add_foreign_key "pay_grade_rates", "pay_grades"
+  add_foreign_key "shift_jobs", "jobs"
+  add_foreign_key "shift_jobs", "shifts"
+  add_foreign_key "shifts", "assignments"
 end
