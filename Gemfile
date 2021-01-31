@@ -45,6 +45,7 @@ gem 'materialize-form', git: 'https://github.com/cmu-is-projects/materialize-for
 gem 'will_paginate'
 gem 'jquery-rails', '4.3.1'
 gem 'jquery-ui-rails', '6.0.1'
+gem 'factory_bot_rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -61,7 +62,6 @@ group :development, :test do
   gem 'hirb'
   gem 'faker'
   gem 'populator'
-  gem 'factory_bot_rails'
   gem 'simplecov'
   gem 'shoulda', '3.5.0'
   gem 'shoulda-matchers', '2.8.0'

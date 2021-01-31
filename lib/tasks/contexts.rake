@@ -4,10 +4,11 @@ namespace :db do
   # executing 'rake db:contexts' will cause this script to run
   task :contexts => :environment do
     # Drop the old db and recreate from scratch
-    Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
+    #Rake::Task['db:drop'].invoke
+    #Rake::Task['db:create'].invoke
     # Invoke rake db:migrate to set up db structure based on latest migrations
     Rake::Task['db:migrate'].invoke
+    require 'factory_bot_rails'
     # Set up test database with that same structure
     #Rake::Task['db:test:prepare'].invoke
 
